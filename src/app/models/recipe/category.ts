@@ -10,4 +10,4 @@ export const RecipeFoodTypes = [
   "Ужин",
 ] as const;
 
-export type RecipeCategory = (typeof RecipeFoodTypes)[number];
+export type RecipeFoodType = (typeof RecipeFoodTypes)[number];

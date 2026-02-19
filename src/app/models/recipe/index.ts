@@ -1,11 +1,10 @@
-import { RecipeCategory as RecipeFoodType } from "./category";
+import { RecipeFoodType } from "./category";
 import { RecipeKitchen } from "./kitchen";
 import { Ingredient } from "../indgredient";
 import { RecipeStep, RecipeStepCategory } from "./step";
 import { RecipeDiet } from "./diet";
 
-export type Recipe = {
-  id: `${string}-${string}-${string}-${string}-${string}`;
+export type NewRecipe = {
   title: string;
   description: string;
   imageUrl: string;
@@ -22,3 +21,7 @@ export type Recipe = {
   steps: RecipeStep[] | RecipeStepCategory[];
   notes?: string[];
 };
+
+export type Recipe = {
+  id: `${string}-${string}-${string}-${string}-${string}`;
+} & NewRecipe;
