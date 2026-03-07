@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { APP_NAME } from "../../recipe-book.config";
 import { ThemeToggleComponent } from "../theme-toggle/theme-toggle.component";
+import { APP_NAME } from "../../tokens/app-name.token";
 
 @Component({
   selector: "recipe-book-header",

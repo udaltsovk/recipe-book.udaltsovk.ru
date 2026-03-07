@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { COPYRIGHT_NAME, FOOTER_LINKS } from "../../recipe-book.config";
 import { FooterLinkDirective } from "../../directives/footer-link.directive";
 import { SvgIconDirective } from "../../directives/svg-icon.directive";
+import { FOOTER_LINKS } from "../../tokens/footer-links.token";
+import { COPYRIGHT_NAME } from "../../tokens/copyright.token";
 
 @Component({
   selector: "recipe-book-footer",

@@ -1,5 +1,6 @@
 import { APP_ID, computed, effect, inject, Injectable, signal, Signal } from "@angular/core";
 import { Recipe } from "../models/recipe";
+import { STORAGE } from "../tokens/storage.token";
 
 @Injectable({
   providedIn: "root",
@@ -10,11 +11,12 @@ export class RecipeService {
 
   readonly recipes = computed(() => Array.from(this.recipeMap().values()));
 
+  private readonly storage = inject(STORAGE);
   private readonly APP_ID = inject(APP_ID);
-  private readonly LOCAL_STORAGE_KEY = `${this.APP_ID}::recipes::v0`;
+  private readonly STORAGE_KEY = `${this.APP_ID}::recipes`;
 
   constructor() {
-    const recipesJson = localStorage.getItem(this.LOCAL_STORAGE_KEY);
+    const recipesJson = this.storage.getItem(this.STORAGE_KEY);
 
     if (recipesJson) {
       const recipes: Recipe[] = JSON.parse(recipesJson);
@@ -33,7 +35,7 @@ export class RecipeService {
 
     effect(() => {
       if (this.isInitialized()) {
-        localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(this.recipes()));
+        this.storage.setItem(this.STORAGE_KEY, JSON.stringify(this.recipes()));
       }
     });
   }

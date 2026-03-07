@@ -1,4 +1,5 @@
 import { APP_ID, effect, inject, Injectable, signal } from "@angular/core";
+import { STORAGE } from "../tokens/storage.token";
 
 export type Theme = "light" | "dark";
 
@@ -6,6 +7,7 @@ export type Theme = "light" | "dark";
   providedIn: "root",
 })
 export class ThemeService {
+  private readonly storage = inject(STORAGE);
   private readonly APP_ID = inject(APP_ID);
   private readonly storageKey = `${this.APP_ID}::theme`;
   readonly theme = signal<Theme>(this.getInitialTheme());
@@ -13,7 +15,7 @@ export class ThemeService {
   constructor() {
     effect(() => {
       const currentTheme = this.theme();
-      localStorage.setItem(this.storageKey, currentTheme);
+      this.storage.setItem(this.storageKey, currentTheme);
       this.applyTheme(currentTheme);
     });
   }
@@ -23,7 +25,7 @@ export class ThemeService {
   }
 
   private getInitialTheme(): Theme {
-    const savedTheme = localStorage.getItem(this.storageKey) as Theme;
+    const savedTheme = this.storage.getItem(this.storageKey) as Theme;
     if (savedTheme) {
       return savedTheme;
     }

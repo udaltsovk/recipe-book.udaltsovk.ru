@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { RouterStateSnapshot, TitleStrategy } from "@angular/router";
-import { APP_NAME } from "../recipe-book.config";
+import { APP_NAME } from "../tokens/app-name.token";
 
 @Injectable()
 export class RecipeBookTitleStrategy extends TitleStrategy {

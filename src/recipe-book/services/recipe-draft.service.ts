@@ -1,6 +1,7 @@
-import { Injectable } from "@angular/core";
+import { APP_ID, inject, Injectable } from "@angular/core";
 import { RecipeFormModel } from "../pages/recipe-form/recipe-form.model";
 import { Recipe } from "../models/recipe";
+import { STORAGE } from "../tokens/storage.token";
 
 export type RecipeDraft = {
   id: string | "new";
@@ -10,7 +11,9 @@ export type RecipeDraft = {
 
 @Injectable({ providedIn: "root" })
 export class RecipeDraftService {
-  private readonly DRAFT_KEY = "recipe-book::draft";
+  private readonly storage = inject(STORAGE);
+  private readonly APP_ID = inject(APP_ID);
+  private readonly DRAFT_KEY = `${this.APP_ID}::draft`;
 
   saveDraft(id: Recipe["id"] | "new", model: RecipeFormModel): void {
     const draft: RecipeDraft = {
@@ -18,11 +21,11 @@ export class RecipeDraftService {
       model,
       timestamp: Date.now(),
     };
-    localStorage.setItem(this.DRAFT_KEY, JSON.stringify(draft));
+    this.storage.setItem(this.DRAFT_KEY, JSON.stringify(draft));
   }
 
   getDraft(id: string | "new"): RecipeDraft | null {
-    const saved = localStorage.getItem(this.DRAFT_KEY);
+    const saved = this.storage.getItem(this.DRAFT_KEY);
     if (!saved) {
       return null;
     }
@@ -37,6 +40,6 @@ export class RecipeDraftService {
   }
 
   clearDraft(): void {
-    localStorage.removeItem(this.DRAFT_KEY);
+    this.storage.removeItem(this.DRAFT_KEY);
   }
 }
