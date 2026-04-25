@@ -1,5 +1,5 @@
 import { APP_ID, effect, inject, Injectable, signal } from "@angular/core";
-import { STORAGE } from "../tokens/storage.token";
+import { STORAGE_TOKEN } from "../tokens/storage.token";
 
 export type Theme = "light" | "dark";
 
@@ -7,7 +7,7 @@ export type Theme = "light" | "dark";
   providedIn: "root",
 })
 export class ThemeService {
-  private readonly storage = inject(STORAGE);
+  private readonly storage = inject(STORAGE_TOKEN);
   private readonly APP_ID = inject(APP_ID);
   private readonly storageKey = `${this.APP_ID}::theme`;
   readonly theme = signal<Theme>(this.getInitialTheme());

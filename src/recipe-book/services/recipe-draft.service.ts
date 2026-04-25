@@ -1,7 +1,7 @@
 import { APP_ID, inject, Injectable } from "@angular/core";
 import { RecipeFormModel } from "../pages/recipe-form/recipe-form.model";
 import { Recipe } from "../models/recipe";
-import { STORAGE } from "../tokens/storage.token";
+import { STORAGE_TOKEN } from "../tokens/storage.token";
 
 export type RecipeDraft = {
   id: string | "new";
@@ -11,7 +11,7 @@ export type RecipeDraft = {
 
 @Injectable({ providedIn: "root" })
 export class RecipeDraftService {
-  private readonly storage = inject(STORAGE);
+  private readonly storage = inject(STORAGE_TOKEN);
   private readonly APP_ID = inject(APP_ID);
   private readonly DRAFT_KEY = `${this.APP_ID}::draft`;
 

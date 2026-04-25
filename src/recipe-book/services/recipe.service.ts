@@ -1,6 +1,6 @@
 import { APP_ID, computed, effect, inject, Injectable, signal, Signal } from "@angular/core";
 import { Recipe } from "../models/recipe";
-import { STORAGE } from "../tokens/storage.token";
+import { STORAGE_TOKEN } from "../tokens/storage.token";
 
 @Injectable({
   providedIn: "root",
@@ -11,7 +11,7 @@ export class RecipeService {
 
   readonly recipes = computed(() => Array.from(this.recipeMap().values()));
 
-  private readonly storage = inject(STORAGE);
+  private readonly storage = inject(STORAGE_TOKEN);
   private readonly APP_ID = inject(APP_ID);
   private readonly STORAGE_KEY = `${this.APP_ID}::recipes`;
 

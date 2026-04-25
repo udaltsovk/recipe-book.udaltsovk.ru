@@ -1,6 +1,8 @@
 import { InjectionToken } from "@angular/core";
 
-export const APP_NAME = new InjectionToken<string>("APP_NAME", {
+export const APP_NAME = "Книга Рецептов";
+
+export const APP_NAME_TOKEN = new InjectionToken<string>("APP_NAME", {
   providedIn: "root",
-  factory: (): string => "Книга Рецептов",
+  factory: (): string => APP_NAME,
 });
